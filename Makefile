@@ -1,2 +1,9 @@
+sourcefiles = main.cpp
+
+all: compile run
+
+run:
+	./program.out
+
 compile:
-	g++-11 -Wall -o program.out main.cpp
+	g++-11 -Wall -o program.out $(sourcefiles)
