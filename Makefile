@@ -6,4 +6,4 @@ run:
 	./program.out
 
 compile:
-	g++-11 -Wall -o program.out $(sourcefiles)
+	g++-11 -std=c++11 -Wall -o program.out $(sourcefiles)

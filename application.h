@@ -9,7 +9,7 @@
 class App {
     private:
         const char* version = "1.0.0";
-        MENUS current_menu;
+        MenuClass* current_menu = nullptr;
         std::vector<MenuClass> menus;
     public:
 
@@ -24,13 +24,13 @@ class App {
 
     //Prints the prompt
     void PrintPrompt() {
-        std::cout << "\t--" << menus[current_menu].getPrompt() << "--\n";
+        std::cout << "\t--" << current_menu->getPrompt() << "--\n";
     }
 
     //Prints the options for selection
     void PrintOptions() {
-        std::cout << menus[current_menu].getOptions() \
-        << "\t0. Exit" << std::endl;
+        current_menu->printOptions();
+        std::cout << "\t0. Exit" << std::endl;
     }
 
     //Reads input from cin
@@ -40,7 +40,7 @@ class App {
         do {
             std::cout << "Pick an option: ";
             std::cin >> temp;
-        } while(temp < 0 || menus[current_menu].getOptionSize() < temp);
+        } while(temp < 0 || current_menu->getOptionSize() < temp);
         output = temp;
     }
 
@@ -50,7 +50,7 @@ class App {
             terminateApp();
         }
 
-        menus[current_menu].RunCommand(input - 1);
+        current_menu->RunCommand(input - 1);
     }
 
     //Terminates the application
@@ -61,17 +61,17 @@ class App {
 
     //Constructor
     App() {
-        menus.push_back(MainMenuClass());
+        menus = {MainMenuClass()};
         //On start, the menu is main menu
-        current_menu = MAIN_MENU;
+        current_menu = &(menus[MAIN_MENU]);
     }
 
 
     //Working with menus
-    void UpdateMenu(MENUS newMenuState) {
-        if(newMenuState < 0 || newMenuState >= menus.size())
+    void UpdateMenu(MENUS newMenuIndex) {
+        if(newMenuIndex < 0 || newMenuIndex >= menus.size())
             throw("Error: Given menu index is out of bounds");
-        current_menu = newMenuState;
+        current_menu = &(menus[newMenuIndex]);
     }
 };
 

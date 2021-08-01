@@ -2,6 +2,8 @@
 #define MENUCLASS_H
 
 #include <vector>
+#include "commandclass.h"
+#include "application.h"
 
 enum MENUS {
     MAIN_MENU,
@@ -11,37 +13,39 @@ enum MENUS {
 class MenuClass {
     private:
 
-        std::vector<void (*)()> commands;
+        std::vector<CommandClass> commandsList;
 
     protected:
 
         const char* prompt;
         const char* options;
-        unsigned int num_of_options;
 
-        void addCommand(void (*function)()) {
-            commands.push_back(function);
+        void SetCommands(std::initializer_list<CommandClass> commands) {
+            commandsList = commands;
         }
 
     public:
         void RunCommand(int indx) {
-            if(indx < 0 || indx > this->commands.size() - 1)
+            if(indx < 0 || indx > this->commandsList.size() - 1)
                 throw("Error: Given Index is not in the range.");
 
             //Run the requested command
-            commands[indx]();
+            commandsList[indx].Do();
         }
 
         const char* getPrompt() {
             return prompt;
         }
 
-        const char* getOptions() {
-            return options;
+        void printOptions() {
+            for(int i = 0; i < commandsList.size(); i++) {
+                std::cout << "\t" << i + 1 << ". " \
+                << commandsList[i].getName() << "\n";
+            }
         }
 
         int getOptionSize() {
-            return num_of_options;
+            return commandsList.size();
         }
 };
 

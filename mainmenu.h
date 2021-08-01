@@ -2,23 +2,23 @@
 #define MAINMENU_H
 
 #include "menuclass.h"
+#include "commandclass.h"
 #include <iostream>
 
 class MainMenuClass : public MenuClass{
     private:
-        static void commandOne() {
-            std::cout << "Passing to Login\n";
-            //Change class
-        }
+
+        CommandClass CommandOne = CommandClass("Login", [] () {
+            std::cout << "Switching to Login Screen" << std::endl;
+        });
+
+        CommandClass CommandTwo = CommandClass("Test", [] () { return ;});
 
     public:
-        MainMenuClass() {
+        MainMenuClass() : MenuClass() {
             prompt = "Main Menu";
-            options = "\t1. Login\n";
 
-            this->addCommand( (void (*)()) &commandOne);
-
-            num_of_options = 1;
+            this->SetCommands( {CommandOne, CommandTwo} );
         }
 };
 
