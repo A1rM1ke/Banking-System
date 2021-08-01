@@ -1,9 +1,12 @@
-sourcefiles = main.cpp
+sourcefiles = main.cpp application.cpp
+CC = g++-11
+CFLAGS = -std=c++17 -Wall -o
+OUTPUT = program.out
 
 all: compile run
 
 run:
-	./program.out
+	./$(OUTPUT)
 
 compile:
-	g++-11 -std=c++11 -Wall -o program.out $(sourcefiles)
+	$(CC) $(CFLAGS) $(OUTPUT) $(sourcefiles)

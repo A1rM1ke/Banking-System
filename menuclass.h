@@ -68,14 +68,10 @@ class MenuClass {
     public:
         //Run a command at an index
         void RunCommand(int indx) {
-            //To do: Move the subtraction here from the App
-
-            //If the index is not in range of possibilities
-            if(indx < 0 || indx > this->commandsList.size() - 1)
-                throw("Error: Given Index is not in the range.");
-
             //Run the requested command
-            commandsList[indx].Invoke();
+            //Note: Subtract 1 from the index
+            //since the commands are stored in an array and start from 0
+            commandsList[indx - 1].Invoke();
         }
 
         //Returns the prompt
@@ -86,7 +82,7 @@ class MenuClass {
         //Prints all of the possible options (except exit)
         void printOptions() {
             //For all CommandClass objects in the commandList array
-            for(int i = 0; i < commandsList.size(); i++) {
+            for(long unsigned int i = 0; i < commandsList.size(); i++) {
                 //Print the index and the name of the command
                 std::cout << "\t" << i + 1 << ". " \
                 << commandsList[i].getName() << "\n";

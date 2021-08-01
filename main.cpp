@@ -1,21 +1,24 @@
 #include <iostream>
 #include "application.h"
 
-App application;
-
 int main() {
 
-    std::cout << "Welcome to the Banking System!\n";
-    std::cout << "Current Version: " << application.getVersion() << "\n" << std::endl;
+    App::Init();
+
+    std::cout << "\n--Welcome to the Banking System!--\n";
+    std::cout << "--Current Version: " << App::Instance->getVersion() << "--\n" << std::endl;
 
     int input = -1;
-    while(true) {
-        application.PrintPrompt();
+    while(!App::Instance->AppShouldClose) {
+        App::Instance->PrintPrompt();
 
-        application.PrintOptions();
+        App::Instance->PrintOptions();
 
-        application.GetInput(input);
+        App::Instance->GetInput(input);
 
-        application.ProcessInput(input);
+        App::Instance->ProcessInput(input);
     }
+
+    App::AppTerminate();
+    return 0;
 }
