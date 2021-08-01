@@ -3,12 +3,25 @@
 
 #include <vector>
 
+enum MENUS {
+    MAIN_MENU,
+    LOGIN_MENU
+};
+
 class MenuClass {
     private:
-        const char* prompt;
-        const char* options;
 
         std::vector<void (*)()> commands;
+
+    protected:
+
+        const char* prompt;
+        const char* options;
+        unsigned int num_of_options;
+
+        void addCommand(void (*function)()) {
+            commands.push_back(function);
+        }
 
     public:
         void RunCommand(int indx) {
@@ -17,6 +30,18 @@ class MenuClass {
 
             //Run the requested command
             commands[indx]();
+        }
+
+        const char* getPrompt() {
+            return prompt;
+        }
+
+        const char* getOptions() {
+            return options;
+        }
+
+        int getOptionSize() {
+            return num_of_options;
         }
 };
 

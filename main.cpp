@@ -14,7 +14,7 @@ int main() {
 
         application.PrintOptions();
 
-        application.GetInput(input, 3);
+        application.GetInput(input);
 
         application.ProcessInput(input);
     }
