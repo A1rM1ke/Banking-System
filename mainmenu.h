@@ -15,7 +15,7 @@ class MainMenuClass : public MenuClass{
         CommandClass CommandTwo = CommandClass("Test", [] () { return ;});
 
     public:
-        MainMenuClass() : MenuClass() {
+        MainMenuClass(App* _appptr) : MenuClass(_appptr) {
             prompt = "Main Menu";
 
             this->SetCommands( {CommandOne, CommandTwo} );

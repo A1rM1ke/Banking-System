@@ -10,6 +10,8 @@ enum MENUS {
     LOGIN_MENU
 };
 
+class App;
+
 class MenuClass {
     private:
 
@@ -20,8 +22,13 @@ class MenuClass {
         const char* prompt;
         const char* options;
 
+        App* appptr = nullptr;
+
         void SetCommands(std::initializer_list<CommandClass> commands) {
             commandsList = commands;
+        }
+
+        MenuClass(App* _appptr) : appptr(_appptr) {
         }
 
     public:

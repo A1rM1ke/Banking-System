@@ -58,20 +58,19 @@ class App {
         std::cout << "Goodbye." << std::endl;
         exit(0);
     }
-
-    //Constructor
-    App() {
-        menus = {MainMenuClass()};
-        //On start, the menu is main menu
-        current_menu = &(menus[MAIN_MENU]);
-    }
-
-
+    
     //Working with menus
     void UpdateMenu(MENUS newMenuIndex) {
         if(newMenuIndex < 0 || newMenuIndex >= menus.size())
             throw("Error: Given menu index is out of bounds");
         current_menu = &(menus[newMenuIndex]);
+    }
+
+    //Constructor
+    App() {
+        menus = {MainMenuClass(this)};
+        //On start, the menu is main menu
+        current_menu = &(menus[MAIN_MENU]);
     }
 };
 
