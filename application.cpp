@@ -30,8 +30,10 @@ App::App() {
 
 void App::Init() {
 
-    if(Instance != nullptr)
-        throw("Error: Trying to initialize another instance of an App class.");
+    if(Instance != nullptr){
+        std::cout << "Error: Trying to initialize multiple instances of an App class.\n";
+        exit(1);
+    }
 
     //Creates a new Instance of the App class in the heap
     //And stores it's pointer in App::Instance

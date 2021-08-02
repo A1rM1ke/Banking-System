@@ -30,15 +30,18 @@ class MainMenuClass : public MenuClass{
 
         //Command #1: Login
         CommandClass CommandOne = CommandClass("Login", [] () {
-            std::cout << "Switching to Login Screen" << std::endl;
+            std::cout << "\nSwitching to Login Screen\n" << std::endl;
         });
 
         //Command #2: Create an Account
-        CommandClass CommandTwo = CommandClass("Test", [] () {
-             return;
+        CommandClass CommandTwo = CommandClass("Create an Account", [] () {
+            std::cout << "\nSwitching to Create Account Screen\n" << std::endl;
         });
 
         //To-do: Add Command #3: About Page
+        CommandClass CommandThree = CommandClass("About", [] () {
+            std::cout << "\nSwitching to About Screen\n" << std::endl;
+        });
 
     /*************
     **  PUBLIC  **
@@ -51,7 +54,7 @@ class MainMenuClass : public MenuClass{
             prompt = "Main Menu";
 
             //Sets the commands with the above created ones
-            this->SetCommands( {CommandOne, CommandTwo} );
+            this->SetCommands( {CommandOne, CommandTwo, CommandThree} );
         }
 };
 

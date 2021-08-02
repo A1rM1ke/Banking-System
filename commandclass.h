@@ -25,6 +25,7 @@ class CommandClass {
     /*************
     **  PUBLIC  **
     *************/
+   
     public:
         //Constructor
         CommandClass(const char* new_name, void (*func)()) {
